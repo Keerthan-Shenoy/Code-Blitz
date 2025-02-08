@@ -31,13 +31,12 @@ export default function Home() {
   ];
   
   const sampleImage = "https://www.chieflearningofficer.com/wp-content/uploads/2023/05/AdobeStock_577015054-1536x1024.jpeg";
-
-  const skillsData = {
-    "Top Skills": [
-      { name: "Data Science", provider: "John Doe", duration: "3 months", price: "$50", image: sampleImage },
+  const topskills=[
+    { name: "Data Science", provider: "John Doe", duration: "3 months", price: "$50", image: sampleImage },
       { name: "Graphic Design", provider: "Jane Smith", duration: "2 months", price: "$40", image: sampleImage },
       { name: "Photography", provider: "Alice Brown", duration: "4 months", price: "$60", image: sampleImage }
-    ],
+  ]
+  const skillsData = {
     Science: [
       { name: "Physics", provider: "Dr. Alan Turing", duration: "3 months", price: "$70", image: sampleImage },
       { name: "Chemistry", provider: "Marie Curie", duration: "4 months", price: "$65", image: sampleImage }
@@ -62,10 +61,10 @@ export default function Home() {
   };
 
   return (
-    <div className="relative min-h-screen bg-yellow-100 p-6 text-gray-900">
+    <div className="relative min-h-screen  p-6 text-gray-900">
       {/* Header */}
       <header className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-blue-700">SKILLEX</h1>
+        <h1 className="text-3xl font-copperplate gothic bold text-blue-700">SKILLEX</h1>
         <div className="flex ml-[200px]">
   <input type="text" placeholder="Search skills..." className="border p-2 rounded w-80 shadow-md mx-auto" />
   <button className="bg-blue-600 text-white px-4 py-2 rounded">Search</button>
@@ -142,7 +141,7 @@ export default function Home() {
           <h2 className="text-2xl font-semibold mb-3 text-blue-700">Top Skills</h2>
           <div className="flex items-center">
             <div ref={scrollRef} className="flex gap-4 overflow-x-auto p-2 w-full no-scrollbar">
-              {skillsData["Top Skills"].map((skill, i) => (
+              {topskills.map((skill, i) => (
                 <div 
                   key={i} 
                   className="relative w-80 p-6 rounded-lg bg-blue-100 shadow-md text-center text-blue-900 transform transition-all hover:scale-110 hover:shadow-xl cursor-pointer"
