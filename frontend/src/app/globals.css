@@ -2,8 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari and Opera */
+  }
+}
+
 :root {
   --background: #f9f9f9;
+  --chat: #7d6565;
   --foreground: #000000;
   --primary-font: #000000;
   --secondary-font: #b9a7a7;
