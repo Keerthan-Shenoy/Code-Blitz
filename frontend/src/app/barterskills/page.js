@@ -36,10 +36,6 @@ export default function SkillRequestsPage() {
     <div className="flex bg-gray-100 min-h-screen">
       <ProfileSidebar />
       <div className="flex-1 p-6 flex flex-col ml-[300px]">
-        <div className="w-full flex justify-between items-center p-4 bg-white shadow-md">
-          <h1 className="text-xl font-bold">SKILLEX</h1>
-          <button onClick={() => router.push("/profile")} className="w-10 h-10 bg-gray-300 rounded-full" />
-        </div>
         
         <div className="mt-10 flex justify-center">
           <button className="px-4 py-2 bg-blue-500 text-white rounded" onClick={() => setShowForm(true)}>Create a New Request</button>

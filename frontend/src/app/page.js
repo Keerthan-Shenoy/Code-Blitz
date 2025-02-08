@@ -1,123 +1,5 @@
-// 'use client';
+"use client";
  
-
-// export default function HomePage() {
-//   return (
-//     <div className="min-h-screen bg-gradient-to-r from-blue-100 to-yellow-100">
-//       <div className="container mx-auto px-4 py-16">
-//         <div className="text-center">
-//           <h1 className="text-4xl font-bold mb-8">Welcome to Phoenix</h1>
-//           <p className="text-xl text-gray-700 mb-8">Rise, share and empower...</p>
-
-//           <div className="bg-white rounded-lg shadow-lg p-8 max-w-2xl mx-auto">
-//             <div className="grid grid-cols-2 gap-6">
-//               <div className="text-center p-4 hover:bg-gray-50 rounded-lg transition">
-//                 <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 mx-auto mb-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-//                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-//                 </svg>
-//                 <h2 className="text-xl font-semibold mb-2">Learn</h2>
-//                 <p className="text-gray-600">Access curated courses and grow your skills</p>
-//               </div>
-
-//               <div className="text-center p-4 hover:bg-gray-50 rounded-lg transition">
-//                 <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 mx-auto mb-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-//                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-//                 </svg>
-//                 <h2 className="text-xl font-semibold mb-2">Connect</h2>
-//                 <p className="text-gray-600">Join communities and collaborate with peers</p>
-//               </div>
-//             </div>
-
-//             <div className="mt-8 flex justify-center space-x-4">
-//               <Link 
-//                 href="/login" 
-//                 className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition"
-//               >
-//                 Login
-//               </Link>
-//               <Link 
-//                 href="/register" 
-//                 className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition"
-//               >
-//                 Register
-//               </Link>
-//               <Link 
-//                 href="/profile" 
-//                 className="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition"
-//               >
-//                 Go to Profile
-//               </Link>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
-// 'use client';
-// import Link from 'next/link';
-
-// export default function HomePage() {
-//   return (
-//     <div className="min-h-screen bg-gradient-to-r from-blue-100 to-yellow-100">
-//       <nav className="bg-white shadow-md">
-//         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-//           <div className="text-2xl font-bold">Phoenix</div>
-          // <div className="flex space-x-4">
-          //   <Link 
-          //     href="/login" 
-          //     className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition"
-          //   >
-          //     Login
-          //   </Link>
-          //   <Link 
-          //     href="/register" 
-          //     className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition"
-          //   >
-          //     SignUp
-          //   </Link>
-          //   <Link 
-          //     href="/profile" 
-          //     className="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition"
-          //   >
-          //     Go to Profile
-          //   </Link>
-          // </div>
-//         </div>
-//       </nav>
-//       <div className="container mx-auto px-4 py-16">
-//         <div className="text-center">
-//           <h1 className="text-4xl font-bold mb-8">Welcome to Phoenix</h1>
-//           <p className="text-xl text-gray-700 mb-8">Rise, share and empower...</p>
-
-//           <div className="bg-white rounded-lg shadow-lg p-8 max-w-2xl mx-auto">
-//             <div className="grid grid-cols-2 gap-6">
-//               <div className="text-center p-4 hover:bg-gray-50 rounded-lg transition">
-//                 <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 mx-auto mb-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-//                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-//                 </svg>
-//                 <h2 className="text-xl font-semibold mb-2">Learn</h2>
-//                 <p className="text-gray-600">Access curated courses and grow your skills</p>
-//               </div>
-
-//               <div className="text-center p-4 hover:bg-gray-50 rounded-lg transition">
-//                 <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 mx-auto mb-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-//                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-//                 </svg>
-//                 <h2 className="text-xl font-semibold mb-2">Connect</h2>
-//                 <p className="text-gray-600">Join communities and collaborate with peers</p>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
-
- "use client";
 import Link from 'next/link';
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
@@ -169,11 +51,6 @@ export default function Home() {
     ]
   };
 
-  const scrollRight = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: 300, behavior: "smooth" });
-    }
-  };
   const sendMessage = () => {
     if (userMessage.trim() !== "") {
       setChatMessages([...chatMessages, { text: userMessage, sender: "user" }]);
@@ -185,15 +62,15 @@ export default function Home() {
   };
 
   return (
-    <div className="relative min-h-screen bg-white p-6 text-gray-900">
+    <div className="relative min-h-screen bg-yellow-100 p-6 text-gray-900">
       {/* Header */}
       <header className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold text-blue-700">SKILLEX</h1>
-        <div className="flex mr-[400px]">
+        <div className="flex ml-[200px]">
   <input type="text" placeholder="Search skills..." className="border p-2 rounded w-80 shadow-md mx-auto" />
   <button className="bg-blue-600 text-white px-4 py-2 rounded">Search</button>
 </div>
-<div className="flex space-x-4 mr-[300px]">
+<div className="flex space-x-4 ml-[190px]">
   <Link 
     href="/login" 
     className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition"
@@ -282,7 +159,6 @@ export default function Home() {
                 </div>
               ))}
             </div>
-            <button onClick={scrollRight} className="ml-2 bg-blue-500 text-white px-4 py-2 rounded-full shadow-md">→</button>
           </div>
         </section>
       )}
