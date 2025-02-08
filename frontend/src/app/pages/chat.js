@@ -3,22 +3,36 @@ import ProfileSidebar from "../components/profile_sidebar";
 import io from "socket.io-client";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { CommunityPath } from "../../../constant";
 
 export default function Chat() {
     const socket = io.connect("http://localhost:3001");
     const [communities, setCommunities] = useState([]);
     const [com_msg, setCommunitiesMessages] = useState([]);
     useEffect(() => {
-        const userID = localStorage.getItem('user').user_id;
-        axios.get(`http://localhost:5050/clubs/${userID}`)
-            .then(response => {
-                console.log(response.data);
-                setCommunities(response.data);
-            })
-            .catch(error => {
-                console.error('There was an error fetching the events!', error);
-            });
-    }, []);
+        const storedUserData = localStorage.getItem('user_data');
+  
+  if (storedUserData) {
+    const userID = JSON.parse(storedUserData); // Parse the JSON string to an object
+    
+    console.log("User_id: ", userID._id);
+    fetch(`${CommunityPath}/user-communities?user_id=${userID._id}`, {  // Append user_id as a query parameter
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      })
+      .then(response => response.json()) // Parse response as JSON
+      .then(data => {
+        console.log(data.communities);
+        setCommunities(data.communities); // Assuming this updates your component's state
+        console.log(communities);
+      })
+      .catch(error => {
+        console.error('There was an error fetching the events!', error);
+      });      
+  }
+}, []);
 
     useEffect(() => {
         const userID = localStorage.getItem('user').user_id;
@@ -33,29 +47,30 @@ export default function Chat() {
     }, []);
     const [room, setRoom] = useState("");
     
-      // Messages States
+    // Messages States
     const [message, setMessage] = useState("");
-    //const [messageReceived, setMessageReceived] = useState("");
+    const [messageReceived, setMessageReceived] = useState("");
     
-      const joinRoom = () => {
+    const joinRoom = (comid) => {
+        setRoom(comid)
         if (room !== "") {
-          socket.emit("join_room", room);
+            socket.emit("join_room", room);
         }
-      };
+    };
     
-      const sendMessage = () => {
+    const sendMessage = () => {
         socket.emit("send_message", { message, room });
-      };
-    
-      useEffect(() => {
-        socket.on("receive_message", (data) => {
-          setMessageReceived(data.message);
-        });
-      }, [socket]);
+    };
+
+    useEffect(() => {
+    socket.on("receive_message", (data) => {
+        setMessageReceived(data.message);
+    });
+    }, [socket]);
     return (
         <div className="flex bg-gradient-to-r from-blue-100 to-yellow-100 min-h-screen px-2">
             {/* Left sidebar - Communities */}
-
+            {/* <img src={communities[0].image_url} /> */}
             <ProfileSidebar />
             <div className="w-[400px] m-10 flex flex-col h-[calc(100vh-5rem)] z-10 pl-[300px]">
                 <div className="text-3xl py-1 font-bold">Communities</div>
@@ -64,12 +79,12 @@ export default function Chat() {
                 </div>
                 <div className="overflow-y-auto flex-1 scrollbar-hide overscroll-none w-[400px]">
                     {communities.map((com) => (
-                        <div className="bg-white flex items-center justify-between py-2 px-5 rounded my-2">
+                        <div key={com._id} className="bg-white flex items-center justify-between py-2 px-5 rounded my-2" onClick={joinRoom(com._id)} >
                             <div className="flex items-center">
-                                <img src={`https://i.pravatar.cc/?img=3`} className="h-16 w-16 rounded-full" />
+                                <img src={com.image_url || "https://i.pravatar.cc/?img=3"} className="h-16 w-16 rounded-full" />
                                 <div className="p-5">
-                                    <div className="text-lg font-bold">Introduction to HTML</div>
-                                    <div className="text-sm">Virat Kohli</div>
+                                    <div className="text-lg font-bold">{com.title}</div>
+                                    <div className="text-sm">{com.host_id.first_name}</div>
                                 </div>
                             </div>
                             <div className="flex flex-col justify-end h-full text-sm text-gray-500 self-end">09:05</div>
@@ -99,7 +114,7 @@ export default function Chat() {
 
                 {/* Chat messages area - Make this scrollable */}
                 <div className="flex-1 overflow-y-auto my-1 scrollbar-hide overscroll-none">
-                    {com_msg.forEach(()=>(
+                    {/* {com_msg.forEach(()=>(
                         <div className="flex px-2 my-2">
                             <img src={`https://i.pravatar.cc/?img=3`} className="h-8 w-8 rounded-full shrink-0" />
                             <div className="flex flex-1 items-end">
@@ -109,7 +124,7 @@ export default function Chat() {
                                 <div className="text-xs whitespace-nowrap ml-2">09:05</div>
                             </div>
                         </div>
-                    ))}
+                    ))} */}
                 </div>
 
                 {/* Chat input - Keep at bottom */}
@@ -124,8 +139,8 @@ export default function Chat() {
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                         </svg>
                     </button>
-                    <input type="text" placeholder="Type a message" className="h-full px-2 w-full outline-none" onChange={setMessage}></input>
-                    <button className="p-2" onClick={sendMessage}>
+                    <input type="text" placeholder="Type a message" className="h-full px-2 w-full outline-none" onChange={setMessage()}></input>
+                    <button className="p-2" onClick={sendMessage()}>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
                         </svg>
