@@ -14,8 +14,8 @@ export default function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     axios.post('http://localhost:5050/signin', {
-      email: formData.email,  // Correcting to use formData
-      password: formData.password,  // Correcting to use formData
+      email: formData.email, 
+      password: formData.password,
     }, {
       headers: {
         'Content-Type': 'application/json',
@@ -24,12 +24,10 @@ export default function LoginPage() {
       .then((response) => {
         console.log(response);
         const data = response.data;
-        
-        // Store user data in localStorage (optional, or you can use context)
-        localStorage.setItem('user', JSON.stringify(data.user));
 
-        alert(data.message);
-        router.push('/');  // Use router to navigate after login
+        localStorage.setItem('user_data', JSON.stringify(data));
+
+        alert("Logged in Successfully");
       })
       .catch((error) => {
         alert(error.message);

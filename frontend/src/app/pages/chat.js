@@ -1,6 +1,44 @@
+'use client'
+import io from "socket.io-client";
+import { useEffect, useState } from "react";
 
+const socket = io.connect("http://localhost:3001");
+
+const [communities, setCommunities] = useState([]);
+useEffect(() => {
+    const userID = localStorage.getItem('user').user_id;
+    axios.get(`http://localhost:5050/clubs/${localStorage.user}`)
+        .then(response => {
+            console.log(response.data);
+            setCommunities(response.data);
+        })
+        .catch(error => {
+            console.error('There was an error fetching the events!', error);
+        });
+}, []);
 
 export default function Chat() {
+    const [room, setRoom] = useState("");
+    
+      // Messages States
+      const [message, setMessage] = useState("");
+      const [messageReceived, setMessageReceived] = useState("");
+    
+      const joinRoom = () => {
+        if (room !== "") {
+          socket.emit("join_room", room);
+        }
+      };
+    
+      const sendMessage = () => {
+        socket.emit("send_message", { message, room });
+      };
+    
+      useEffect(() => {
+        socket.on("receive_message", (data) => {
+          setMessageReceived(data.message);
+        });
+      }, [socket]);
     return (
         <div className="flex bg-gradient-to-r from-blue-100 to-yellow-100 min-h-screen p-10 ">
             {/* Left sidebar - Communities */}
@@ -10,46 +48,16 @@ export default function Chat() {
                     <input type='text' className="h-[50px] pl-10 w-[500px] outline-none" placeholder="Search"></input>
                 </div>
                 <div className="overflow-y-auto flex-1 scrollbar-hide overscroll-none">
-                    <div className="bg-white flex items-center py-2 px-5 rounded my-2">
-                        <img src={`https://i.pravatar.cc/?img=3`} className="h-16 w-16 rounded-full" />
-                        <div className="p-5">
-                            <div className="text-lg font-bold">Introduction to HTML</div>
-                            <div className="text-sm">Virat Kohli</div>
+                    {communities.map((com) => (
+                        <div className="bg-white flex items-center py-2 px-5 rounded my-2">
+                            <img src={`https://i.pravatar.cc/?img=3`} className="h-16 w-16 rounded-full" />
+                                <div className="p-5">
+                                    <div className="text-lg font-bold">{com.title}</div>
+                                    <div className="text-sm">{com}</div>
+                                </div>
+                            <div className="justify-end">5 minute ago</div>
                         </div>
-                        <div className="justify-end">5 minute ago</div>
-                    </div>
-                    <div className="bg-white flex items-center py-2 px-5 rounded my-2">
-                        <img src={`https://i.pravatar.cc/?img=3`} className="h-16 w-16 rounded-full" />
-                        <div className="p-5">
-                            <div className="text-lg font-bold">Introduction to HTML</div>
-                            <div className="text-sm">Virat Kohli</div>
-                        </div>
-                        <div className="justify-end">5 minute ago</div>
-                    </div>
-                    <div className="bg-white flex items-center py-2 px-5 rounded my-2">
-                        <img src={`https://i.pravatar.cc/?img=3`} className="h-16 w-16 rounded-full" />
-                        <div className="p-5">
-                            <div className="text-lg font-bold">Introduction to HTML</div>
-                            <div className="text-sm">Virat Kohli</div>
-                        </div>
-                        <div className="justify-end">5 minute ago</div>
-                    </div>
-                    <div className="bg-white flex items-center py-2 px-5 rounded my-2">
-                        <img src={`https://i.pravatar.cc/?img=3`} className="h-16 w-16 rounded-full" />
-                        <div className="p-5">
-                            <div className="text-lg font-bold">Introduction to HTML</div>
-                            <div className="text-sm">Virat Kohli</div>
-                        </div>
-                        <div className="justify-end">5 minute ago</div>
-                    </div>
-                    <div className="bg-white flex items-center py-2 px-5 rounded my-2">
-                        <img src={`https://i.pravatar.cc/?img=3`} className="h-16 w-16 rounded-full" />
-                        <div className="p-5">
-                            <div className="text-lg font-bold">Introduction to HTML</div>
-                            <div className="text-sm">Virat Kohli</div>
-                        </div>
-                        <div className="justify-end">5 minute ago</div>
-                    </div>
+                    ))}
                 </div>
             </div>
 
@@ -171,8 +179,8 @@ export default function Chat() {
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                         </svg>
                     </button>
-                    <input type="text" placeholder="Type a message" className="h-full px-2 w-full outline-none"></input>
-                    <button className="p-2">
+                    <input type="text" placeholder="Type a message" className="h-full px-2 w-full outline-none" onChange={setMessage}></input>
+                    <button className="p-2" onClick={sendMessage}>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
                         </svg>
