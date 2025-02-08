@@ -1,7 +1,9 @@
 'use client'
 import React, { useState } from 'react';
 import axios from 'axios';
+import { UserPaths } from '../../../constant';
 export default function SignUp() {
+
   const [formData, setFormData] = useState({
     username: '',
     about: '',
@@ -30,7 +32,7 @@ export default function SignUp() {
       alert("Passwords do not match, try again.");
     } 
     else {
-    axios.post('http://localhost:5050/signup', formData, {
+    axios.post(`${UserPaths}/register`, formData, {
         headers: {
           'Content-Type': 'application/json',
         }
