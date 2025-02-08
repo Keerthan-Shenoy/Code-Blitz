@@ -1,7 +1,7 @@
-import CreateSkill from './pages/createSkill.js'
+import SignUp from './register/page.js'
 
 export default function HomePage() {
   return (
-    <CreateSkill/>
+    <SignUp/>
   );
 }

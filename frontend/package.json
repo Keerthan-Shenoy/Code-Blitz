@@ -9,18 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
-<<<<<<< HEAD
     "@heroicons/react": "^2.2.0",
+    "axios": "^1.7.9",
     "next": "^15.1.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "socket.io-client": "^4.8.1"
-=======
-    "next": "15.1.6",
-    "next.js": "^1.0.3",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
->>>>>>> 09068e42253dad76928138c3c1cda79160826e80
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

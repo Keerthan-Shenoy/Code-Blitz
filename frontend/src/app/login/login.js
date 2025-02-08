@@ -1,17 +1,39 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
+import axios from 'axios';
+import { useRouter } from 'next/navigation'; // To handle navigation
 
 export default function LoginPage() {
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
+  const router = useRouter(); // Hook to handle navigation
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add your login logic here
-    console.log('Login attempt:', formData);
+    axios.post('http://localhost:5050/signin', {
+      email: formData.email,  // Correcting to use formData
+      password: formData.password,  // Correcting to use formData
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+      .then((response) => {
+        console.log(response);
+        const data = response.data;
+        
+        // Store user data in localStorage (optional, or you can use context)
+        localStorage.setItem('user', JSON.stringify(data.user));
+
+        alert(data.message);
+        router.push('/');  // Use router to navigate after login
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
   };
 
   const handleChange = (e) => {
@@ -20,9 +42,8 @@ export default function LoginPage() {
       [e.target.name]: e.target.value
     });
   };
-
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+    <div className="min-h-screen bg-gradient-to-r from-blue-100 to-yellow-100 flex items-center justify-center">
       <div className="bg-white p-8 rounded-lg shadow-md w-96">
         <h2 className="text-2xl font-bold text-center mb-6">Login</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
