@@ -1,7 +1,7 @@
-import Profile from './pages/profile.js'
+import CreateSkill from './pages/createSkill.js'
 
 export default function Home() {
   return (
-    <Profile />
+    <CreateSkill/>
   );
 }
