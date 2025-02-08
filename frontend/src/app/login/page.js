@@ -1,9 +1,8 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
-import axios from 'axios';
 import { useRouter } from 'next/navigation'; // To handle navigation
-
+import { UserPaths } from '../../../constant';
 export default function LoginPage() {
   const [formData, setFormData] = useState({
     email: '',
@@ -13,29 +12,42 @@ export default function LoginPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    axios.post('http://localhost:5050/signin', {
-      email: formData.email,  // Correcting to use formData
-      password: formData.password,  // Correcting to use formData
-    }, {
+    console.log(formData.email);
+    console.log(formData.password);
+  
+    fetch(`${UserPaths}/login`, {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-      }
+      },
+      body: JSON.stringify({
+        email: formData.email,
+        password: formData.password,
+      }),
     })
       .then((response) => {
-        console.log(response);
-        const data = response.data;
-        
-        // Store user data in localStorage (optional, or you can use context)
-        localStorage.setItem('user', JSON.stringify(data.user));
-
-        alert(data.message);
-        router.push('/');  // Use router to navigate after login
+        if (!response.ok) {
+          // If response status is not in the 200 range, throw an error
+          return response.json().then((error) => {
+            throw new Error(error.error); // Assuming your backend sends { error: "message" }
+          });
+        }
+        return response.json(); // Parse the JSON response
+      })
+      .then((data) => {
+        console.log("Response Data: ", data);
+  
+        // Store user data in local storage
+        localStorage.setItem('user_data', JSON.stringify(data.user));
+  
+        alert("Logged in Successfully");
       })
       .catch((error) => {
+        console.log("Login Error: ", error.message);
         alert(error.message);
       });
   };
-
+  
   const handleChange = (e) => {
     setFormData({
       ...formData,

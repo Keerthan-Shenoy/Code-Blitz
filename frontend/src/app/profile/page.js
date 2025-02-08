@@ -14,7 +14,7 @@ export default function Profile() {
   return (
     <div className="flex bg-gradient-to-r from-blue-100 to-yellow-100">
       <ProfileSidebar />
-      <div className="flex-1 p-8 ml-[300px]">
+      <div className="flex-1 px-24 py-16 ml-[300px]">
         <div className="mb-8">
           <div className="text-xl py-1">Welcome, Virat</div>
           <div className="text-sm text-secondaryfont py-1">
