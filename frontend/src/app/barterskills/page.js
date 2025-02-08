@@ -1,84 +1,60 @@
-"use client";
+'use client';
+import { CloudArrowUpIcon, LockClosedIcon, ServerIcon } from '@heroicons/react/20/solid'
+import SkillShare from './skill-share';
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import ProfileSidebar from "../components/profile_sidebar";
-
-export default function SkillRequestsPage() {
-  const router = useRouter();
-  const [showForm, setShowForm] = useState(false);
-  const [selectedUserSkill, setSelectedUserSkill] = useState("");
-  const [selectedSkill, setSelectedSkill] = useState("");
-  
-  const userSkills = ["Web Development", "Graphic Design", "Photography"];
-  const allSkills = ["Python", "JavaScript", "UI/UX Design", "Video Editing"];
-
-  const pendingSentRequests = [
-    { provider: "Alice", skill: "UI/UX Design" },
-    { provider: "Bob", skill: "Python" },
-  ];
-
-  const pendingReceivedRequests = [
-    { provider: "Charlie", skill: "Video Editing" },
-    { provider: "David", skill: "JavaScript" },
-  ];
-
-  const handleSubmit = () => {
-    if (selectedUserSkill && selectedSkill) {
-      alert("Request sent");
-      setShowForm(false);
-    } else {
-      alert("Please fill in all fields");
-    }
-  };
-
+export default function Example() {
   return (
-    <div className="flex bg-gray-100 min-h-screen">
-      <ProfileSidebar />
-      <div className="flex-1 p-6 flex flex-col ml-[300px]">
-        
-        <div className="mt-10 flex justify-center">
-          <button className="px-4 py-2 bg-blue-500 text-white rounded" onClick={() => setShowForm(true)}>Create a New Request</button>
+    <div className="relative isolate overflow-hidden bg-white px-6 py-24 sm:py-32 lg:overflow-visible lg:px-0 min-h-screen">
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        <svg
+          aria-hidden="true"
+          className="absolute left-[50%] top-0 h-full w-[200%] -translate-x-1/2 stroke-gray-200 [mask-image:radial-gradient(100%_100%_at_top_center,white,transparent)]"
+        >
+          <defs>
+            <pattern
+              id="pattern-grid"
+              x="50%"
+              y="0"
+              width="200"
+              height="200"
+              patternUnits="userSpaceOnUse"
+            >
+              <path d="M100 200V.5M.5 .5H200" fill="none" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" strokeWidth="0" fill="url(#pattern-grid)" />
+        </svg>
+      </div>
+      <div className="mx-36 flex">
+        <div>
+          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl">
+            Barter skills
+          </h1>
+          <p className="mt-6 text-xl/8 text-gray-700">
+            An interface where you can share skills for free
+          </p>
+          <div className="text-base/7 text-gray-700">
+            <ul role="list" className="mt-8 space-y-8 text-gray-600">
+              <li className="flex gap-x-3">
+                <span>
+                  <strong className="font-semibold text-gray-900">Provide</strong> Contibute a skill to the community
+                </span>
+              </li>
+              <li className="flex gap-x-3">
+                <span>
+                  <strong className="font-semibold text-gray-900">Gain</strong> Upskill yourself by learning from others
+                </span>
+              </li>
+              <li className="flex gap-x-3">
+                <span>
+                  <strong className="font-semibold text-gray-900">Free</strong> Barter skills at no expense, completely for free
+                </span>
+              </li>
+            </ul>
+          </div>
         </div>
-        
-        {showForm && (
-          <div className="mt-4 p-6 bg-white shadow-lg rounded-lg w-full max-w-md mx-auto">
-            <h2 className="text-lg font-semibold mb-4">New Skill Request</h2>
-            <div className="mb-2">
-              <label className="block mb-1">Select Your Skill</label>
-              <select className="w-full p-2 border rounded" onChange={(e) => setSelectedUserSkill(e.target.value)}>
-                <option value="">-- Select --</option>
-                {userSkills.map((skill, idx) => (
-                  <option key={idx} value={skill}>{skill}</option>
-                ))}
-              </select>
-            </div>
-            <div className="mb-2">
-              <label className="block mb-1">Select Skill You Need</label>
-              <select className="w-full p-2 border rounded" onChange={(e) => setSelectedSkill(e.target.value)}>
-                <option value="">-- Select --</option>
-                {allSkills.map((skill, idx) => (
-                  <option key={idx} value={skill}>{skill}</option>
-                ))}
-              </select>
-            </div>
-            <button className="px-4 py-2 bg-green-500 text-white rounded" onClick={handleSubmit}>Submit Request</button>
-          </div>
-        )}
-        
-        <div className="mt-10 w-full flex justify-center gap-6">
-          <div className="w-full max-w-md p-4 bg-white shadow-lg">
-            <h2 className="text-lg font-semibold mb-4">Pending Sent Requests</h2>
-            {pendingSentRequests.map((req, idx) => (
-              <div key={idx} className="p-2 border-b">{req.provider} - {req.skill}</div>
-            ))}
-          </div>
-          <div className="w-full max-w-md p-4 bg-white shadow-lg">
-            <h2 className="text-lg font-semibold mb-4">Pending Received Requests</h2>
-            {pendingReceivedRequests.map((req, idx) => (
-              <div key={idx} className="p-2 border-b">{req.provider} - {req.skill}</div>
-            ))}
-          </div>
+        <div>
+          <SkillShare />
         </div>
       </div>
     </div>
