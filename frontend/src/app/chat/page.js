@@ -3,6 +3,8 @@
 import ProfileSidebar from "../components/profile_sidebar";
 import { useState, useEffect, useRef } from "react";
 
+
+
 export default function Chat() {
     const [isOpen, setIsOpen] = useState(false);
     const chatRef = useRef(null);
@@ -43,7 +45,7 @@ export default function Chat() {
                 <div className="overflow-y-auto flex-1 scrollbar-hide overscroll-none w-[400px]">
                     <div className="bg-white flex items-center justify-between py-2 px-5 rounded my-2">
                         <div className="flex items-center">
-                            <img src={'https://i.pravatar.cc/?img=3'} className="h-16 w-16 rounded-full" />
+                            <img src={`https://i.pravatar.cc/?img=3`} className="h-16 w-16 rounded-full" />
                             <div className="p-5">
                                 <div className="text-lg font-bold">Introduction to HTML</div>
                                 <div className="text-sm">Virat Kohli</div>
@@ -53,7 +55,7 @@ export default function Chat() {
                     </div>
                     <div className="bg-white flex items-center justify-between py-2 px-5 rounded my-2">
                         <div className="flex items-center">
-                            <img src={'https://i.pravatar.cc/?img=3'} className="h-16 w-16 rounded-full" />
+                            <img src={`https://i.pravatar.cc/?img=3`} className="h-16 w-16 rounded-full" />
                             <div className="p-5">
                                 <div className="text-lg font-bold">Introduction to HTML</div>
                                 <div className="text-sm">Virat Kohli</div>
@@ -63,7 +65,7 @@ export default function Chat() {
                     </div>
                     <div className="bg-white flex items-center justify-between py-2 px-5 rounded my-2">
                         <div className="flex items-center">
-                            <img src={'https://i.pravatar.cc/?img=3'} className="h-16 w-16 rounded-full" />
+                            <img src={`https://i.pravatar.cc/?img=3`} className="h-16 w-16 rounded-full" />
                             <div className="p-5">
                                 <div className="text-lg font-bold">Introduction to HTML</div>
                                 <div className="text-sm">Virat Kohli</div>
@@ -73,7 +75,7 @@ export default function Chat() {
                     </div>
                     <div className="bg-white flex items-center justify-between py-2 px-5 rounded my-2">
                         <div className="flex items-center">
-                            <img src={'https://i.pravatar.cc/?img=3'} className="h-16 w-16 rounded-full" />
+                            <img src={`https://i.pravatar.cc/?img=3`} className="h-16 w-16 rounded-full" />
                             <div className="p-5">
                                 <div className="text-lg font-bold">Introduction to HTML</div>
                                 <div className="text-sm">Virat Kohli</div>
@@ -83,7 +85,7 @@ export default function Chat() {
                     </div>
                     <div className="bg-white flex items-center justify-between py-2 px-5 rounded my-2">
                         <div className="flex items-center">
-                            <img src={'https://i.pravatar.cc/?img=3'} className="h-16 w-16 rounded-full" />
+                            <img src={`https://i.pravatar.cc/?img=3`} className="h-16 w-16 rounded-full" />
                             <div className="p-5">
                                 <div className="text-lg font-bold">Introduction to HTML</div>
                                 <div className="text-sm">Virat Kohli</div>
@@ -99,7 +101,7 @@ export default function Chat() {
                 {/* Chat header */}
                 <div className="bg-white flex items-center justify-between rounded px-5 py-2">
                     <div className="flex items-center">
-                        <img src={'https://i.pravatar.cc/?img=3'} className="h-16 w-16 rounded-full" />
+                        <img src={`https://i.pravatar.cc/?img=3`} className="h-16 w-16 rounded-full" />
                         <div className="p-5">
                             <div className="text-lg font-bold">Introduction to HTML</div>
                             <div className="text-sm">Virat Kohli</div>
@@ -116,7 +118,7 @@ export default function Chat() {
                 {/* Chat messages area - Make this scrollable */}
                 <div className="flex-1 overflow-y-auto my-1 scrollbar-hide overscroll-none">
                     <div className="flex px-2 my-2">
-                        <img src={'https://i.pravatar.cc/?img=3'} className="h-8 w-8 rounded-full shrink-0" />
+                        <img src={`https://i.pravatar.cc/?img=3`} className="h-8 w-8 rounded-full shrink-0" />
                         <div className="flex flex-1 items-end">
                             <div className="text-black bg-white px-5 py-2 max-w-[66%] ml-5 mr-1 rounded break-words">
                                 <div className="font-bold">Virat Kohli</div>
@@ -126,7 +128,7 @@ export default function Chat() {
                         </div>
                     </div>
                     <div className="flex px-2 my-2">
-                        <img src={'https://i.pravatar.cc/?img=3'} className="h-8 w-8 rounded-full shrink-0" />
+                        <img src={`https://i.pravatar.cc/?img=3`} className="h-8 w-8 rounded-full shrink-0" />
                         <div className="flex flex-1 items-end">
                             <div className="text-black bg-white px-5 py-2 max-w-[66%] ml-5 mr-1 rounded break-words">
                                 Hello
@@ -175,7 +177,7 @@ export default function Chat() {
                         </div>
                     </div>
                     <div className="flex px-2 my-2">
-                        <img src={'https://i.pravatar.cc/?img=3'} className="h-8 w-8 rounded-full shrink-0" />
+                        <img src={`https://i.pravatar.cc/?img=3`} className="h-8 w-8 rounded-full shrink-0" />
                         <div className="flex flex-1 items-end">
                             <div className="text-black bg-white px-5 py-2 max-w-[66%] ml-5 mr-1 rounded break-words">
                                 Hello
@@ -184,7 +186,7 @@ export default function Chat() {
                         </div>
                     </div>
                     <div className="flex px-2 my-2">
-                        <img src={'https://i.pravatar.cc/?img=3'} className="h-8 w-8 rounded-full shrink-0" />
+                        <img src={`https://i.pravatar.cc/?img=3`} className="h-8 w-8 rounded-full shrink-0" />
                         <div className="flex flex-1 items-end">
                             <div className="text-black bg-white px-5 py-2 max-w-[66%] ml-5 mr-1 rounded break-words">
                                 Hello
@@ -193,7 +195,7 @@ export default function Chat() {
                         </div>
                     </div>  
                     <div className="flex px-2 my-2">
-                        <img src={'https://i.pravatar.cc/?img=3'} className="h-8 w-8 rounded-full shrink-0" />
+                        <img src={`https://i.pravatar.cc/?img=3`} className="h-8 w-8 rounded-full shrink-0" />
                         <div className="flex flex-1 items-end">
                             <div className="text-black bg-white px-5 py-2 max-w-[66%] ml-5 mr-1 rounded break-words">
                                 Welcome
