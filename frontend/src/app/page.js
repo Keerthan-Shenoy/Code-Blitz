@@ -1,7 +1,8 @@
-import Profile from './pages/profile.js'
+// import SignUp from './register/page.js'
+import Chat from './pages/chat';
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <Profile />
+    <Chat  />
   );
 }
