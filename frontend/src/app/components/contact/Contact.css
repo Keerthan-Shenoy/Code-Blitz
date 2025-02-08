@@ -1,0 +1,51 @@
+.contacts {
+    padding: 50px 0;
+  }
+  .contacts .container {
+    display: flex;
+    justify-content: space-between;
+  }
+  .contacts .left {
+    flex: 1;
+  }
+  .contacts .right {
+    flex: 1;
+    padding: 20px;
+  }
+  .contacts .items {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .contacts .box {
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-radius: 5px;
+  }
+  .contacts form {
+    margin-top: 20px;
+  }
+  .contacts form .flexSB {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .contacts form input,
+  .contacts form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  .contacts form .primary-btn {
+    background-color: #1eb2a6;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .contacts form .primary-btn:hover {
+    background-color: #17a2a6;
+  }

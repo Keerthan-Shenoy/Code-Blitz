@@ -4,6 +4,7 @@ import io from "socket.io-client";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { CommunityPath } from "../../../constant";
+import Link from 'next/link';
 
 export default function Chat() {
     const socket = io.connect("http://localhost:3001");
@@ -14,7 +15,6 @@ export default function Chat() {
   
   if (storedUserData) {
     const userID = JSON.parse(storedUserData); // Parse the JSON string to an object
-    
     console.log("User_id: ", userID._id);
     fetch(`${CommunityPath}/user-communities?user_id=${userID._id}`, {  // Append user_id as a query parameter
         method: 'GET',
@@ -22,10 +22,10 @@ export default function Chat() {
           'Content-Type': 'application/json',
         }
       })
-      .then(response => response.json()) // Parse response as JSON
+      .then(response => response.json()) 
       .then(data => {
         console.log(data.communities);
-        setCommunities(data.communities); // Assuming this updates your component's state
+        setCommunities(data.communities); 
         console.log(communities);
       })
       .catch(error => {
@@ -36,7 +36,7 @@ export default function Chat() {
 
     useEffect(() => {
         const userID = localStorage.getItem('user').user_id;
-        axios.get(`http://localhost:5050/clubs/${userID}`)
+        axios.get(`http://localhost:5000/clubs/${userID}`)
             .then(response => {
                 console.log(response.data);
                 setCommunitiesMessages(response.data);
@@ -56,6 +56,25 @@ export default function Chat() {
         if (room !== "") {
             socket.emit("join_room", room);
         }
+        useEffect(() => {
+           fetch(`${UserPaths}/login`, {
+                 method: 'POST',
+                 headers: {
+                   'Content-Type': 'application/json',
+                 },
+                 body: JSON.stringify({
+                   email: formData.email,
+                   password: formData.password,
+                 }),
+               })
+                .then(response => {
+                    console.log(response.data);
+                    setCommunitiesMessages(response.data);
+                })
+                .catch(error => {
+                    console.error('There was an error fetching the messages!', error);
+                });
+        }, []);
     };
     
     const sendMessage = () => {
@@ -114,17 +133,18 @@ export default function Chat() {
 
                 {/* Chat messages area - Make this scrollable */}
                 <div className="flex-1 overflow-y-auto my-1 scrollbar-hide overscroll-none">
-                    {/* {com_msg.forEach(()=>(
-                        <div className="flex px-2 my-2">
-                            <img src={`https://i.pravatar.cc/?img=3`} className="h-8 w-8 rounded-full shrink-0" />
-                            <div className="flex flex-1 items-end">
-                                <div className="text-black bg-white px-5 py-2 max-w-[66%] ml-5 mr-1 rounded break-words">
-                                    Hellooo oo ooo ooooooo ooooo oooo oooooo ooo ooooooo oooo oooooooo ooo ooooooooo oooo oooooooo oooooo ooooo o ooooooo oooooooo ooooooooo ooooooo ooooooo oooo ooooo ooooooo  ooooo
-                                </div>
-                                <div className="text-xs whitespace-nowrap ml-2">09:05</div>
+                    {com_msg.forEach(()=>(
+                       <div className="flex px-2 my-2">
+                       <img src={'https://i.pravatar.cc/?img=3'} className="h-8 w-8 rounded-full shrink-0" />
+                        <div className="flex flex-1 items-end">
+                            <div className="text-black bg-white px-5 py-2 max-w-[66%] ml-5 mr-1 rounded break-words">
+                                <div className="font-bold">Virat Kohli</div>
+                                <div className="text-sm">com_smg</div>
                             </div>
+                            <div className="text-xs whitespace-nowrap ml-2">09:05</div>
                         </div>
-                    ))} */}
+                        </div>
+                    ))}
                 </div>
 
                 {/* Chat input - Keep at bottom */}
