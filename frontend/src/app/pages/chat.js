@@ -1,6 +1,37 @@
+'use client';
+
 import ProfileSidebar from "../components/profile_sidebar";
+import { useState, useEffect, useRef } from "react";
+
+
 
 export default function Chat() {
+    const [isOpen, setIsOpen] = useState(false);
+    const chatRef = useRef(null);
+    const buttonRef = useRef(null);
+    const fileInputRef = useRef(null);
+
+    const handleFileSelect = (event) => {
+        const files = event.target.files;
+        // Handle the selected files here
+        console.log('Selected files:', files);
+    };
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            // Check if click is outside both the dialog and the button
+            if (chatRef.current && 
+                !chatRef.current.contains(event.target) && 
+                !buttonRef.current.contains(event.target)) {
+                setIsOpen(false);
+            }
+        };
+        
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+    
     return (
         <div className="flex bg-gradient-to-r from-blue-100 to-yellow-100 min-h-screen px-2">
             {/* Left sidebar - Communities */}
@@ -90,7 +121,8 @@ export default function Chat() {
                         <img src={`https://i.pravatar.cc/?img=3`} className="h-8 w-8 rounded-full shrink-0" />
                         <div className="flex flex-1 items-end">
                             <div className="text-black bg-white px-5 py-2 max-w-[66%] ml-5 mr-1 rounded break-words">
-                                Hellooo oo ooo ooooooo ooooo oooo oooooo ooo ooooooo oooo oooooooo ooo ooooooooo oooo oooooooo oooooo ooooo o ooooooo oooooooo ooooooooo ooooooo ooooooo oooo ooooo ooooooo  ooooo
+                                <div className="font-bold">Virat Kohli</div>
+                                <div className="text-sm">Hellooo oo ooo ooooooo ooooo oooo oooooo ooo ooooooo oooo oooooooo ooo ooooooooo oooo oooooooo oooooo ooooo o ooooooo oooooooo ooooooooo ooooooo ooooooo oooo ooooo ooooooo  ooooo</div>
                             </div>
                             <div className="text-xs whitespace-nowrap ml-2">09:05</div>
                         </div>
@@ -175,12 +207,19 @@ export default function Chat() {
 
                 {/* Chat input - Keep at bottom */}
                 <div className="h-[50px] bg-white mt-1 flex items-center">
-                    <button className="pl-5 pr-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="m18.375 12.739-7.693 7.693a4.5 4.5 0 0 1-6.364-6.364l10.94-10.94A3 3 0 1 1 19.5 7.372L8.552 18.32m.009-.01-.01.01m5.699-9.941-7.81 7.81a1.5 1.5 0 0 0 2.112 2.13" />
-                        </svg>
-                    </button>
-                    <button className="p-2">
+                    <input 
+                        ref={fileInputRef}
+                        type="file" 
+                        className="hidden"
+                        onChange={handleFileSelect}
+                    />
+                    <button className="pl-5 pr-2" 
+                    onClick={() => fileInputRef.current?.click()}>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="m18.375 12.739-7.693 7.693a4.5 4.5 0 0 1-6.364-6.364l10.94-10.94A3 3 0 1 1 19.5 7.372L8.552 18.32m.009-.01-.01.01m5.699-9.941-7.81 7.81a1.5 1.5 0 0 0 2.112 2.13" />
+                    </svg>
+                </button>
+                    <button ref={buttonRef} className="p-2" onClick={() => setIsOpen(!isOpen)}>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                         </svg>
@@ -193,6 +232,25 @@ export default function Chat() {
                     </button>
                 </div>
             </div>
+            {isOpen && (
+                <div ref={chatRef} className="fixed bottom-20 right-5 w-80 bg-white shadow-lg rounded-lg p-4 border border-gray-300">
+                <h2 className="text-lg font-bold text-blue-700">Schedule Session</h2>
+                <input
+                    type="text"
+                    placeholder="Enter the topic..."
+                    className="w-full border p-2 rounded mt-2"
+                />
+                <input
+                    type="date"
+                    className="w-full border p-2 rounded mt-2"
+                />
+                <input
+                    type="time"
+                    className="w-full border p-2 rounded mt-2"
+                />
+                <button className="mt-2 bg-blue-600 text-white px-3 py-1 rounded">Schedule</button>
+                </div>
+            )}
         </div>
     );
 }
