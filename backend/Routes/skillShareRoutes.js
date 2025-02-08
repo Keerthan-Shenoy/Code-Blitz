@@ -90,5 +90,35 @@ router.get("/requestsToUser/:userId", async (req, res) => {
     }
 });
 
+// Endpoint to get all requests sent BY a user's communities
+router.get("/requestsFromUser/:userId", async (req, res) => {
+    try {
+        const userId = req.params.userId;
+        console.log(`Fetching skill share requests sent from communities hosted by user: ${userId}`);
+
+        // Find all communities hosted by the user
+        const userCommunities = await Community.find({ host_id: userId }).select("_id");
+        const communityIds = userCommunities.map(com => com._id);
+
+        // Fetch requests sent from those communities
+        const requests = await Skillshare.find({ req_com_id: { $in: communityIds } })
+            .populate({
+                path: "req_com_id",
+                select: "title host_id",
+                populate: { path: "host_id", select: "first_name email" },
+            })
+            .populate({
+                path: "to_com_id",
+                select: "title host_id",
+                populate: { path: "host_id", select: "first_name email" },
+            });
+
+        res.status(200).json({ message: "Requests sent from user's communities fetched successfully", requests });
+    } catch (err) {
+        console.error("❌ Error fetching requests:", err);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
 
 export default router;
