@@ -130,7 +130,7 @@ export default function Home() {
     <div className="relative min-h-screen text-gray-900">
       {/* Header */}
       <header className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-blue-700">SKILLEX</h1>
+        <h1 className="text-3xl font-copperplate gothic bold text-blue-700">SKILLEX</h1>
         <div className="flex ml-[200px]">
           <input
             type="text"
