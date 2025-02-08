@@ -61,7 +61,7 @@ router.get("/all-communities", async (req, res) => {
 
 router.get("/user-communities", async (req, res) => {
     try {
-        const { user_id } = req.body;
+        const { user_id } = req.query;
         console.log(`Fetching communities for user: ${user_id}`);
 
         // ✅ Convert user_id to ObjectId
