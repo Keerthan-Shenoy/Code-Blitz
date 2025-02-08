@@ -25,7 +25,7 @@ export default function LoginPage() {
         console.log(response);
         const data = response.data;
 
-        localStorage.setItem('user_data', JSON.stringify(data));
+        localStorage.setItem('user_data', JSON.stringify(data.user));
 
         alert("Logged in Successfully");
       })
