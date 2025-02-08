@@ -1,15 +1,17 @@
-
+import ProfileSidebar from "../components/profile_sidebar";
 
 export default function Chat() {
     return (
-        <div className="flex bg-gradient-to-r from-blue-100 to-yellow-100 min-h-screen py-1 px-5">
+        <div className="flex bg-gradient-to-r from-blue-100 to-yellow-100 min-h-screen px-2">
             {/* Left sidebar - Communities */}
-            <div className="w-[500px] m-10 flex flex-col h-[calc(100vh-8rem)]">
+
+            <ProfileSidebar />
+            <div className="w-[400px] m-10 flex flex-col h-[calc(100vh-5rem)] z-10 pl-[300px]">
                 <div className="text-3xl py-1 font-bold">Communities</div>
                 <div className="py-5">
-                    <input type='text' className="h-[50px] pl-10 w-[500px] outline-none" placeholder="Search"></input>
+                    <input type='text' className="h-[50px] pl-10 w-[400px] outline-none" placeholder="Search"></input>
                 </div>
-                <div className="overflow-y-auto flex-1 scrollbar-hide overscroll-none">
+                <div className="overflow-y-auto flex-1 scrollbar-hide overscroll-none w-[400px]">
                     <div className="bg-white flex items-center justify-between py-2 px-5 rounded my-2">
                         <div className="flex items-center">
                             <img src={`https://i.pravatar.cc/?img=3`} className="h-16 w-16 rounded-full" />
@@ -64,7 +66,7 @@ export default function Chat() {
             </div>
 
             {/* Right section - Chat area */}
-            <div className="m-10 w-full flex flex-col h-[calc(100vh-8rem)]">
+            <div className="m-10 w-full flex flex-col h-[calc(100vh-5rem)] pl-[250px]">
                 {/* Chat header */}
                 <div className="bg-white flex items-center justify-between rounded px-5 py-2">
                     <div className="flex items-center">
