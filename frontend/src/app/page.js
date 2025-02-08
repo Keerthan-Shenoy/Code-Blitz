@@ -1,7 +1,7 @@
-import Profile from './pages/profile.js'
+import Chat from './pages/chat';
 
 export default function Home() {
   return (
-    <Profile />
+    <Chat  />
   );
 }
