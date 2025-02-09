@@ -4,6 +4,9 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation'; // To handle navigation
 import { UserPaths } from '../../../constant';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation'; // To handle navigation
+import { UserPaths } from '../../../constant';
 
 export default function LoginPage() {
   const [formData, setFormData] = useState({
@@ -43,6 +46,9 @@ export default function LoginPage() {
         localStorage.setItem('user_data', JSON.stringify(data.user));
 
         alert("Logged in Successfully");
+
+        // Redirect to home page
+        router.push('/');
       })
       .catch((error) => {
         console.log("Login Error: ", error.message);
@@ -95,8 +101,17 @@ export default function LoginPage() {
             
             {/* Login Form */}
             <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
               <div className="mb-4">
                 <label className="block text-gray-600 font-bold">Email Address</label>
+                <input 
+                  type="email" 
+                  name="email" 
+                  value={formData.email} 
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500" 
+                  placeholder="Enter your email" 
+                />
                 <input 
                   type="email" 
                   name="email" 
@@ -108,6 +123,14 @@ export default function LoginPage() {
               </div>
               <div className="mb-4">
                 <label className="block text-gray-600 font-bold">Password</label>
+                <input 
+                  type="password" 
+                  name="password" 
+                  value={formData.password} 
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500" 
+                  placeholder="Enter your password" 
+                />
                 <input 
                   type="password" 
                   name="password" 

@@ -85,7 +85,7 @@ export default function Home() {
   };
 
   return (
-    <div className="relative min-h-screen text-gray-900">
+    <div className="relative min-h-screen text-gray-900 p-5 bg-gradient-to-r from-green-100 to-yellow-100">
       {/* Header */}
       <header className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-copperplate gothic bold text-blue-700">SKILLEX</h1>
