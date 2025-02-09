@@ -1,267 +1,216 @@
-'use client'
-import React, { useState } from 'react';
-import axios from 'axios';
-import { UserPaths } from '../../../constant';
-export default function SignUp() {
+'use client';
 
+import Link from 'next/link';
+import { useState } from 'react';
+import { UserPaths } from '../../../constant';
+
+export default function RegisterPage() {
   const [formData, setFormData] = useState({
-    username: '',
-    about: '',
-    firstName: '',
-    lastName: '',
-    gender: 'Male',
-    email: '',
-    create_password: '',
-    password: '',
+    first_name: '',
+    last_name: '',
     country: '',
-    dob: ''
+    gender: '',
+    dob: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    about: '',
+    profile: null,
   });
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value, type, files } = e.target;
+    if (type === 'file') {
+      // Set file to 'profile' key in formData
+      setFormData({ ...formData, profile: files[0] });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault(); 
-    const { create_password, password } = formData;
-    
-    if (create_password !== password) {
-      alert("Passwords do not match, try again.");
-    } 
-    else {
-    axios.post(`${UserPaths}/register`, formData, {
-        headers: {
-          'Content-Type': 'application/json',
-        }
-    })
-    .then((response) => {
-      if (response.status === 200) {
-        alert("SignUp successful");
-      } 
-      else {
-        alert("Email/User_name already exists");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { password, confirmPassword } = formData;
+  
+    // Check if passwords match
+    if (password !== confirmPassword) {
+      alert('Passwords do not match');
+      return;
+    }
+  
+    // Prepare FormData to submit
+    const formDataToSubmit = new FormData();
+    for (const key in formData) {
+      // Append 'profile' file key as 'profile'
+      if (key === 'profile') {
+        formDataToSubmit.append('profile', formData[key]); // Use 'profile' as the key for the image
+      } else {
+        formDataToSubmit.append(key, formData[key]);
       }
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
+    }
+  
+    try {
+      // Send POST request with FormData
+      const response = await fetch(`${UserPaths}/register`, {
+        method: 'POST',
+        body: formDataToSubmit,
+      });
+  
+      // Check if the response is successful
+      if (response.ok) {
+        alert('User registered successfully');
+        // Redirect to the desired URL after successful registration
+        window.location.href = 'http://localhost:3000';
+      } else {
+        const errorData = await response.json();
+        alert(errorData?.error || 'Registration failed');
+      }
+    } catch (error) {
+      console.error('Registration error:', error);
+      alert('Registration failed');
     }
   };
   
 
   return (
-    <div className="flex justify-center bg-gradient-to-r from-blue-100 to-yellow-100 items-center min-h-screen  p-8">
-      <form onSubmit={handleSubmit}>
-        <div className="space-y-12">
-        <img
-          alt="SkillEx"
-          src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600"
-          className="mx-auto h-10 w-auto"
-        />
-          <div className="border-b border-gray-100/10 pb-12">
-          <h1 className="text-2xl font-semibold leading-9 text-grey">Sign Up</h1>
+    <div className="flex flex-col min-h-screen bg-gray-100">
+      <div className="flex justify-center items-center h-full">
+        <div className="w-full max-w-4xl bg-white shadow-lg rounded-lg p-8 overflow-auto">
+          <h2 className="text-2xl font-bold text-center text-gray-700 mb-8">Sign Up</h2>
 
-            <p className="mt-1 text-sm leading-6 text-gray-600">
-              This information will be displayed publicly so be careful what you share.
+          {/* Register Form */}
+          <form onSubmit={handleSubmit} encType="multipart/form-data">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+              <div className="mb-4">
+                <label className="block text-gray-600">First Name</label>
+                <input
+                  type="text"
+                  name="first_name"
+                  value={formData.first_name}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                  placeholder="Enter your first name"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-600">Last Name</label>
+                <input
+                  type="text"
+                  name="last_name"
+                  value={formData.last_name}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                  placeholder="Enter your last name"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-600">Email Address</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                  placeholder="Enter your email"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-600">Country</label>
+                <input
+                  type="text"
+                  name="country"
+                  value={formData.country}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                  placeholder="Enter your country"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-600">Date of Birth</label>
+                <input
+                  type="date"
+                  name="dob"
+                  value={formData.dob}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-600">Gender</label>
+                <select
+                  name="gender"
+                  value={formData.gender}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                >
+                  <option>Male</option>
+                  <option>Female</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="mb-4">
+              <label className="block text-gray-600">About</label>
+              <textarea
+                name="about"
+                value={formData.about}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                rows="4"
+                placeholder="Write a few sentences about yourself"
+              ></textarea>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+              <div className="mb-4">
+                <label className="block text-gray-600">Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                  placeholder="Enter your password"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-600">Confirm Password</label>
+                <input
+                  type="password"
+                  name="confirmPassword"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                  placeholder="Confirm your password"
+                />
+              </div>
+            </div>
+
+            <div className="mb-6">
+              <label className="block text-gray-600">Profile Image</label>
+              <input
+                type="file"
+                name="profile"
+                onChange={handleChange}
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+
+            <div className="flex justify-between items-center mb-6">
+              <label className="flex items-center text-gray-600">
+                <input type="checkbox" className="mr-2" /> I agree to the terms and conditions
+              </label>
+            </div>
+
+            <button className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition">Register</button>
+
+            <p className="text-center text-gray-600 mt-4">
+              Already have an account? <Link href="/login" className="text-blue-500 hover:underline">Login</Link>
             </p>
-
-            <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-              <div className="sm:col-span-4">
-                <label htmlFor="username" className="block text-sm font-medium leading-6 text-grey">
-                  Username
-                </label>
-                <div className="mt-2">
-                  <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                    <input
-                      id="username"
-                      name="username"
-                      type="text"
-                      value={formData.username}
-                      onChange={handleChange}
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      />
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-span-full">
-                <label htmlFor="about" className="block text-sm font-medium leading-6 text-grey">
-                  About
-                </label>
-                <div className="mt-2">
-                  <textarea
-                    id="about"
-                    name="about"
-                    rows={3}
-                    value={formData.about}
-                    onChange={handleChange}
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-                <p className="mt-3 text-sm leading-6 text-gray-600">Write a few sentences about yourself.</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="border-b border-gray-900/10 pb-12">
-            <h2 className="text-base font-semibold leading-7 text-grey">Personal Information</h2>
-            <p className="mt-1 text-sm leading-6 text-gray-600">Use a permanent address where you can receive mail.</p>
-
-            <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-              <div className="sm:col-span-3">
-                <label htmlFor="firstName" className="block text-sm font-medium leading-6 text-grey">
-                  First name
-                </label>
-                <div className="mt-2">
-                  <input
-                    id="firstName"
-                    name="firstName"
-                    type="text"
-                    value={formData.firstName}
-                    onChange={handleChange}
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>
-
-              <div className="sm:col-span-3">
-                <label htmlFor="lastName" className="block text-sm font-medium leading-6 text-grey">
-                  Last name
-                </label>
-                <div className="mt-2">
-                  <input
-                    id="lastName"
-                    name="lastName"
-                    type="text"
-                    value={formData.lastName}
-                    onChange={handleChange}
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>
-
-              <div className="sm:col-span-3">
-                <label htmlFor="country" className="block text-sm font-medium leading-6 text-grey">
-                  Country
-                </label>
-                <div className="mt-2">
-                  <input
-                    id="country"
-                    name="country"
-                    type="text"
-                    value={formData.country}
-                    onChange={handleChange}
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>
-
-              <div className="sm:col-span-3">
-                <label htmlFor="dob" className="block text-sm font-medium leading-6 text-grey">
-                  Date of Birth
-                </label>
-                <div className="mt-2">
-                  <input
-                    id="dob"
-                    name="dob"
-                    type="date"
-                    value={formData.dob}
-                    onChange={handleChange}
-                    className="block w-full rounded-md bg-background px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                  />
-                </div>
-              </div>
-
-              <div className="sm:col-span-4">
-                <label htmlFor="contact" className="block text-sm font-medium leading-6 text-grey">
-                  Email id
-                </label>
-                <div className="mt-2">
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>
-
-              <div className="sm:col-span-3">
-              <label htmlFor="gender" className="block text-sm font-medium leading-6 text-grey">
-                    Gender
-                  </label>
-                  <div className="mt-2 grid grid-cols-1">
-                    <select
-                      id="gender"
-                      name="gender"
-                      autoComplete="gender"
-                      className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-background py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                    >
-                      <option>Male</option>
-                      <option>Female</option>
-                      <option>Others</option>
-                    </select>
-                  </div>
-              </div>
-
-              <div className="sm:col-span-4">
-                <label htmlFor="create_password" className="block text-sm font-medium leading-6 text-grey">
-                  Create Password
-                </label>
-                <div className="mt-2">
-                  <input
-                    id="create_password"
-                    name="create_password"
-                    type="password"
-                    value={formData.create_password}
-                    onChange={handleChange}
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>
-
-              <div className="sm:col-span-4">
-                <label htmlFor="password" className="block text-sm font-medium leading-6 text-grey">
-                  Confirm Password
-                </label>
-                <div className="mt-2">
-                  <input
-                    id="password"
-                    name="password"
-                    type="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
+          </form>
         </div>
-
-        <div className="mt-6 flex items-center justify-end gap-x-6">
-          <button
-            onClick={(e)=>{
-              navigate('/')
-            }}
-            className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-           type="button">
-            Cancel
-          </button>
-          <button
-            onClick={handleSubmit}
-            type="submit"
-            className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          >
-            SignUp
-          </button>
-        </div>
-      </form>
+      </div>
     </div>
   );
 }
