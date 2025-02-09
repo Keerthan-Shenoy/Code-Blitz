@@ -11,6 +11,8 @@ export default function Home() {
   const [chatOpen, setChatOpen] = useState(false);
   const [chatMessages, setChatMessages] = useState([]);
   const [userMessage, setUserMessage] = useState("");
+  const userData = localStorage.getItem('user_data');
+  const user = JSON.parse(userData);
   const stats = [
     { name: 'Courses', value: '50+' },
     { name: 'Learners', value: '300+' },
@@ -127,7 +129,7 @@ export default function Home() {
   };
 
   return (
-    <div className="relative min-h-screen text-gray-900">
+    <div className="relative min-h-screen text-gray-900 p-5 bg-gradient-to-r from-green-100 to-yellow-100">
       {/* Header */}
       <header className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-copperplate gothic bold text-blue-700">SKILLEX</h1>
@@ -142,18 +144,19 @@ export default function Home() {
           </button>
         </div>
         <div className="flex space-x-4 ml-[190px]">
-          <Link
+          {!user && <Link
             href="/login"
             className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition"
           >
             Login
-          </Link>
+          </Link>}
+          {!user &&
           <Link
             href="/register"
             className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-green-700 transition"
           >
             SignUp
-          </Link>
+          </Link>}
           <Link
             href="/profile"
             className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition"
@@ -161,15 +164,6 @@ export default function Home() {
             Profile
           </Link>
         </div>
-        {/* <div className="fixed top-5 right-5">
-  <button 
-    onClick={() => window.location.href = "/profile"} 
-    className="w-14 h-14 flex flex-col items-center justify-center rounded-full bg-blue-600 text-white shadow-lg hover:bg-blue-700 transition"
-  >
-    
-    <span className="text-xs mt-1">Profile</span>
-  </button>
-</div> */}
       </header>
 
       {/* Categories Selection */}
@@ -357,19 +351,20 @@ export default function Home() {
         >
           <h2 className="text-lg font-bold text-blue-700">Chatbot</h2>
           <div className="h-40 overflow-y-auto border p-2 mb-2 scrollbar-hide overscroll-none">
-            {chatMessages.map((msg, i) => (
-              <div
-                key={i}
-                className={`p-2 my-2 rounded ${
-                  msg.sender === "user"
-                    ? "bg-blue-200 text-right"
-                    : "bg-white"
-                }`}
-              >
-                {msg.text}
-              </div>
-            ))}
-          </div>
+          {chatMessages.map((msg, i) => (
+            <div
+              key={i}
+              className={`p-2 my-2 rounded ${
+                msg.sender === "user"
+                  ? "bg-blue-200 text-right"
+                  : "bg-white"
+              }`}
+              style={{  width: 'auto' }}
+            >
+              {msg.text}
+            </div>
+          ))}
+</div>
           <div className='flex'>
             <input
               type="text"
