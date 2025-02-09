@@ -6,6 +6,7 @@ import authRoutes from "./Routes/authRoutes.js";
 import CommunityRoutes from "./Routes/communityRoutes.js";
 import MessageRoutes from "./Routes/messageRoutes.js";
 import skillShareRoutes from "./Routes/skillShareRoutes.js";
+import MeetingRoutes from "./Routes/meetingRoutes.js"
 
 dotenv.config();
 
@@ -19,5 +20,6 @@ app.use("/api/auth", authRoutes);
 app.use("/api/community", CommunityRoutes);
 app.use("/api/message", MessageRoutes);
 app.use("/api/skill-share", skillShareRoutes);
+app.use("/api/meeting", MeetingRoutes)
 
 app.listen(5000, () => console.log("Server running on port 5000"));
