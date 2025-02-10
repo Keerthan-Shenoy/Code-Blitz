@@ -90,7 +90,11 @@ Install Dependencies
       http://localhost:3000
 
 ## 📜 License
-This project is licensed under the **MIT License**.
+
+This project is licensed under the **MIT License**.  
+Click [here](https://opensource.org/licenses/MIT) to read the full license.
+
+
 
 
 ---
