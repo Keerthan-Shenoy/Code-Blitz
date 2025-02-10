@@ -92,7 +92,7 @@ Install Dependencies
 ## 📜 License
 
 This project is licensed under the **MIT License**.  
-Click [here](https://opensource.org/licenses/MIT) to read the full license.
+Click [here](https://github.com/manas1331/Code-Blitz/blob/main/LICENSE) to read the full license.
 
 
 
