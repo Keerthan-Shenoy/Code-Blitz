@@ -52,8 +52,8 @@ A feature so that students and skill providers can discuss about the course and 
 
 1. **Clone the Repository**
    ```sh
-   git clone https://github.com/yourusername/community-skill-sharing.git
-   cd community-skill-sharing
+   git clone https://github.com/manas1331/Code-Blitz.git
+   cd Code-Blitz
 
 Install Dependencies
 
@@ -78,7 +78,7 @@ Install Dependencies
 5. Start backend server
     ```sh
       cd backend
-      npm run dev
+      node server.js
 
 6. Start frontend server
      ```sh
@@ -93,7 +93,6 @@ Install Dependencies
 
 This project is licensed under the **MIT License**.  
 Click [here](https://github.com/manas1331/Code-Blitz/blob/main/LICENSE) to read the full license.
-
 
 
 
