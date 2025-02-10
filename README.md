@@ -5,29 +5,35 @@ The **Community Skill Sharing Platform** is an innovative web application design
 
 ## Features
 
-### Home Page
+### Home Page with Chatbot
 A dynamic landing page that introduces users to the platform's capabilities and functionalities.  
-📌 **![Home Page](path/to/image.png)**
-
+ ![home](https://github.com/user-attachments/assets/a1f0068b-1796-46b1-86bc-0b92a521e562)
+_____
 ### Student Portal
 A personalized dashboard allowing students to track progress, enroll in courses, and engage with mentors.  
-📌 **![Student Portal](path/to/image.png)**
-
-### AI Chatbot
-An intelligent chatbot designed to assist users with queries, skill recommendations, and navigation.  
-📌 **![Chatbot](path/to/image.png)**
+  ![student portal](https://github.com/user-attachments/assets/f60d88e7-d37c-41da-a76d-d4215c10c98a)
+_____
 
 ### Skill Creation Module
 A feature enabling users to create and share skills with the community, fostering a collaborative learning environment.  
-📌 **![Skill Creation](path/to/image.png)**
+![create skill](https://github.com/user-attachments/assets/40685c17-88da-45ca-9418-0bb5fb5ccf29)
+_____
 
 ### Quiz & Assessments
-Interactive quizzes and assessments to evaluate knowledge retention and reinforce learning outcomes.  
-📌 **![Quiz](path/to/image.png)**
+Interactive quizzes and assessments to evaluate knowledge of skill providers.  
+![quiz](https://github.com/user-attachments/assets/bc58aafe-9d24-42af-b1a3-6685fb9bf46f)
+_____
 
 ### Upcoming Sessions
 A dedicated scheduler providing details on upcoming skill-sharing sessions, including topics and speakers.  
-📌 **![Upcoming Sessions](path/to/image.png)**
+![image](https://github.com/user-attachments/assets/351f5872-169e-4664-b95a-465d5acf2b72)
+
+_____
+
+### Group Chat
+A feature so that students and skill providers can discuss about the course and share relavant info.
+![group chat](https://github.com/user-attachments/assets/7dce5764-56e7-4aa9-bdc8-2b452ae730b3)
+
 
 ## Technology Stack
 
