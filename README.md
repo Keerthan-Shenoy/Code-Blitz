@@ -1,7 +1,7 @@
 # Community Skill Sharing Platform
 
 ## Overview
-The **Community Skill Sharing Platform** is an innovative web application designed to facilitate knowledge exchange between learners and experts. Developed using **Next.js** and **Tailwind CSS** for the frontend, **Node.js** and **Express.js** for the backend, and **MongoDB Atlas** for database management, this platform provides a structured environment for users to create, share, and participate in skill development sessions efficiently.
+The **Community Skill Sharing Platform** is an innovative web application designed to facilitate knowledge exchange between learners and skill providers.It is a peer to peer network. Developed using **Next.js** and **Tailwind CSS** for the frontend, **Node.js** and **Express.js** for the backend, and **MongoDB Atlas** for database management, this platform provides a structured environment for users to create, share, and participate in skill development sessions efficiently.
 
 ## Features
 
