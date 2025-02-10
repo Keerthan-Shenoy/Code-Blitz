@@ -94,6 +94,6 @@ This project is licensed under the **MIT License**.
 If you find this project useful, please consider **starring** the repository on GitHub!  
 Click the ⭐ button at the top right to show your support. 🚀  
 
-[![GitHub Stars](https://img.shields.io/github/stars/manas1331/community-skill-sharing.svg?style=social)](https://github.com/manas1331/community-skill-sharing)
+[![GitHub Stars](https://img.shields.io/github/stars/manas1331/Code-blitzsvg?style=social)](https://github.com/manas1331/Code-blitz)
 
 
