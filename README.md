@@ -55,7 +55,6 @@ A feature so that students and skill providers can discuss about the course and 
    git clone https://github.com/manas1331/Code-Blitz.git
    cd Code-Blitz
 
-Install Dependencies
 
 2. Install frontend dependencies
    ```sh
